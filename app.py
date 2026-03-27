@@ -1,25 +1,3 @@
-import os
-import requests
-import pickle
-
-FILE_URL = "https://drive.google.com/uc?id=1ck1WXQgNuksXbe-sA-ipP1QJ5JzeC1Zw"
-FILE_NAME = "similarity.pkl"
-
-def download_file():
-    response = requests.get(FILE_URL, stream=True)
-    with open(FILE_NAME, "wb") as f:
-        for chunk in response.iter_content(chunk_size=8192):
-            if chunk:
-                f.write(chunk)
-
-# Download only if not exists
-if not os.path.exists(FILE_NAME):
-    print("Downloading similarity.pkl...")
-    download_file()
-    print("Download complete!")
-
-# Load file
-similarity = pickle.load(open(FILE_NAME, "rb"))
 import streamlit as st
 import pickle
 import requests
